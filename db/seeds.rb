@@ -22,3 +22,16 @@ Color.create(color: "#66D9EE", color_type: "12", colorable_id: Theme.all.first.i
 Color.create(color: "#AE82FF", color_type: "13", colorable_id: Theme.all.first.id, colorable_type: "Theme")
 Color.create(color: "#66EFD5", color_type: "14", colorable_id: Theme.all.first.id, colorable_type: "Theme")
 Color.create(color: "#CFD0C2", color_type: "15", colorable_id: Theme.all.first.id, colorable_type: "Theme")
+
+10.times do 
+  u = User.create(username: Faker::JapaneseMedia::DragonBall.character, email: Faker::Internet.email)
+  t = Theme.create(name: Faker::Movies::LordOfTheRings.location, user: User.all.sample)
+
+  index = 0
+  16.times do
+    Color.create(color: Faker::Color.hex_color, color_type: "#{index}", colorable_id: t.id, colorable_type: "Theme")
+    index += 1
+  end
+  Color.create(color: Faker::Color.hex_color, color_type: "background", colorable_id: t.id, colorable_type: "Theme")
+  Color.create(color: Faker::Color.hex_color, color_type: "foreground", colorable_id: t.id, colorable_type: "Theme")
+end
