@@ -1,6 +1,11 @@
 class ThemesController < ApplicationController
   before_action :find_theme, only: [:show]
 
+  def index 
+    theme = Theme.all
+    render json: theme, include: [:colors]
+  end
+
   def show 
     render json: @theme, include: [:colors]
   end
