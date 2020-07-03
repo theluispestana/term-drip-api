@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_28_022028) do
+ActiveRecord::Schema.define(version: 2020_07_03_194854) do
 
   create_table "colors", force: :cascade do |t|
     t.string "color"
@@ -31,11 +31,17 @@ ActiveRecord::Schema.define(version: 2020_06_28_022028) do
   end
 
   create_table "prompts", force: :cascade do |t|
-    t.string "name"
-    t.integer "user_id", null: false
+    t.integer "theme_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_prompts_on_user_id"
+    t.index ["theme_id"], name: "index_prompts_on_theme_id"
+  end
+
+  create_table "terminal_colorschemes", force: :cascade do |t|
+    t.integer "theme_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["theme_id"], name: "index_terminal_colorschemes_on_theme_id"
   end
 
   create_table "themes", force: :cascade do |t|
@@ -56,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_06_28_022028) do
   end
 
   add_foreign_key "prompt_items", "prompts"
-  add_foreign_key "prompts", "users"
+  add_foreign_key "prompts", "users", column: "theme_id"
+  add_foreign_key "terminal_colorschemes", "themes"
   add_foreign_key "themes", "users"
 end

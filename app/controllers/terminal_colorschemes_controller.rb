@@ -1,0 +1,2 @@
+class TerminalColorschemesController < ApplicationController
+end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :terminal_colorschemes
   resources :colors
   resources :prompt_items
   resources :prompts

@@ -7,7 +7,10 @@ class ThemesController < ApplicationController
   end
 
   def show 
-    render json: @theme, include: [:colors]
+    theme = Theme.find_by(id: params[:id])
+    colors = theme.colors
+    render json: { theme: theme, colors: colors }
+    # render json: @theme, include: [:colors]
   end
 
   private

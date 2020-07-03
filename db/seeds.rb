@@ -1,5 +1,8 @@
 User.destroy_all
 Theme.destroy_all
+TerminalColorscheme.destroy_all
+Prompts.destroy_all
+PromptItems.destroy_all
 Color.destroy_all
 
 User.create(username: "theluispestana", email: "lpestana@protonmail.com")
@@ -23,15 +26,24 @@ Color.create(color: "#AE82FF", color_type: "13", colorable_id: Theme.all.first.i
 Color.create(color: "#66EFD5", color_type: "14", colorable_id: Theme.all.first.id, colorable_type: "Theme")
 Color.create(color: "#CFD0C2", color_type: "15", colorable_id: Theme.all.first.id, colorable_type: "Theme")
 
-10.times do 
+25.times do 
   u = User.create(username: Faker::JapaneseMedia::DragonBall.character, email: Faker::Internet.email)
   t = Theme.create(name: Faker::Movies::LordOfTheRings.location, user: User.all.sample)
 
+  term = TerminalColorscheme.create(theme: t)
   index = 0
   16.times do
-    Color.create(color: Faker::Color.hex_color, color_type: "#{index}", colorable_id: t.id, colorable_type: "Theme")
+    Color.create(color: Faker::Color.hex_color, color_type: "#{index}", colorable_id: term.id, colorable_type: "TerminalColorscheme")
     index += 1
   end
-  Color.create(color: Faker::Color.hex_color, color_type: "background", colorable_id: t.id, colorable_type: "Theme")
-  Color.create(color: Faker::Color.hex_color, color_type: "foreground", colorable_id: t.id, colorable_type: "Theme")
+  Color.create(color: Faker::Color.hex_color, color_type: "background", colorable_id: term.id, colorable_type: "TerminalColorscheme")
+  Color.create(color: Faker::Color.hex_color, color_type: "foreground", colorable_id: term.id, colorable_type: "TerminalColorscheme")
+
+  p = Prompt.create(theme: t)
+  items = ['username', 'date', 'time']
+  3.times do
+    p_item = PromptItem.create(order: rand(1..3), prompt_type: items.sample, prompt: p)
+    Color.create(color: Faker::Color.hex_color, color_type: "background", colorable_id: p_item.id, colorable_type: "PromptItem")
+    Color.create(color: Faker::Color.hex_color, color_type: "foreground", colorable_id: p_item.id, colorable_type: "PromptItem")
+  end
 end
