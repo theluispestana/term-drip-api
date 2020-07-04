@@ -1,5 +1,5 @@
 class Theme < ApplicationRecord
   belongs_to :user
-  has_many :terminal_colorschemes, dependent: :destroy
-  has_many :prompts, dependent: :destroy
+  has_one :terminal_colorscheme, dependent: :destroy
+  has_one :prompt, dependent: :destroy
 end
