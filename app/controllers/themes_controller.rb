@@ -13,7 +13,6 @@ class ThemesController < ApplicationController
   end
 
   def create
-    # byebug
     theme = Theme.create(name: theme_params[:name], user: current_user)
     if theme.valid?
       prompt = Prompt.create(theme: theme)
@@ -21,7 +20,6 @@ class ThemesController < ApplicationController
         new_item = PromptItem.create(prompt_type: prompt_item["type"], prompt: prompt)
         Color.create(color_type: "background", color: prompt_item["background"], colorable_type: "PromptItem", colorable_id: new_item.id) if prompt_item["background"]
         Color.create(color_type: "foreground", color: prompt_item["foreground"], colorable_type: "PromptItem", colorable_id: new_item.id) if prompt_item["foreground"]
-        byebug
       end
 
       color_scheme = TerminalColorscheme.create(theme: theme)
