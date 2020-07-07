@@ -1,6 +1,5 @@
-User.destroy_all
 
-User.create(username: "theluispestana", email: "lpestana@protonmail.com")
+User.create(username: "theluispestana", email: "lpestana@protonmail.com", password: "test")
 Theme.create(name: "default_template", user: User.all.first)
 TerminalColorscheme.create(theme: Theme.all.first)
 Color.create(color: "#272822", color_type: "background", colorable_id: TerminalColorscheme.all.first.id, colorable_type: "TerminalColorscheme")
@@ -25,7 +24,7 @@ Color.create(color: "#CFD0C2", color_type: "15", colorable_id: TerminalColorsche
 Prompt.create(theme: Theme.all.first)
 
 25.times do 
-  u = User.create(username: Faker::JapaneseMedia::DragonBall.character, email: Faker::Internet.email)
+  u = User.create(username: Faker::JapaneseMedia::DragonBall.character, email: Faker::Internet.email, password: "test")
   t = Theme.create(name: Faker::Movies::LordOfTheRings.location, user: User.all.sample)
 
   term = TerminalColorscheme.create(theme: t)

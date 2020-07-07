@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2020_07_03_194854) do
   end
 
   add_foreign_key "prompt_items", "prompts"
-  add_foreign_key "prompts", "users", column: "theme_id"
+  add_foreign_key "prompts", "themes"
   add_foreign_key "terminal_colorschemes", "themes"
   add_foreign_key "themes", "users"
 end

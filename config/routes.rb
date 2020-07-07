@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :themes, only: [:index, :show]
+  resources :themes, only: [:index, :show, :create]
   resources :users, only: [:create]
   post '/login', to: 'auth#create'
   get '/profile', to: 'users#profile'
